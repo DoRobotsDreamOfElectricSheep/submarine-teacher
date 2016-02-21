@@ -1,5 +1,4 @@
-<html>
-<head>
+<html><head>
     <style>
         html {
             background: #809E9F;
@@ -66,24 +65,30 @@
             border-radius: 80px;
         }
 
-        #editor-monitor {
+        .monitor {
             border-radius: 20px;
             overflow: hidden;
             /* margin: 10px; */
             border: 10px solid #ACD0D0;
             background: #8FAFB0;
+            margin-bottom: 10px;
 
         }
-        #editor-screen {
+        .screen {
             border: 8px solid #8FAFB0;
             border-radius: 5px;
         }
         #editor{
-            height: 412px;
+            height: 288px;
             border-radius: 18px;
             background: rgb(98, 132, 90);
         }
 
+        #lesson{
+            background: black;
+            height: 76px;
+            border-radius: 18px;
+        }
         .ace_text-layer {
             text-shadow: 0 0 1px !important;
         }
@@ -101,6 +106,30 @@
         .ace-monokai {
             background-color: #000000 !important;
         }
+
+        #transmit-panel {
+            width: 110px;
+            height: 44px;
+            background: #809E9F;
+            bottom: 38px;
+            z-index: 5;
+            margin: 0 auto;
+            padding: 10px;
+            position: relative;
+            border-radius: 5px;
+            border-right: 1px solid #667E7E;
+            box-shadow: -2px 5px 0px 1px #667E7E;
+        }
+
+        #transmit-button {
+            width: 106px;
+            height: 44px;
+            background: #D80000;
+            border-radius: 20px;
+            margin: 0px auto;
+            border-left: 0px solid black;
+        }
+
     </style>
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script src="js/ace/ace.js" type="text/javascript" charset="utf-8"></script>
@@ -108,41 +137,43 @@
     <script src="js/ace/mode-css.js" type="text/javascript" charset="utf-8"></script>
 </head>
 <body>
-    <div id="left-col">
-        <div class="panel"></div>
-        <div class="panel"></div>
-        <div class="panel"></div>
-    </div>
-    <div id="right-col">
-        <div class="panel"></div>
-        <div class="panel"></div>
-        <div class="panel"></div>
-    </div>
-    <div id="middle-col">
-        <canvas id="vision" class="panel"></canvas>
-        <div class="monitor">
-            <div class="screen">
-                <div id="lesson"></div>
-            </div>
-        </div>
-        <div class="monitor">
-            <div class="screen">
-                <div id="editor"></div>
-            </div>
+<div id="left-col">
+    <div class="panel"></div>
+    <div class="panel"></div>
+    <div class="panel"></div>
+</div>
+<div id="right-col">
+    <div class="panel"></div>
+    <div class="panel"></div>
+    <div class="panel"></div>
+</div>
+<div id="middle-col">
+    <canvas id="vision" class="panel"></canvas>
+    <div class="monitor">
+        <div class="screen">
+            <div id="lesson"></div>
         </div>
     </div>
-    <script type="text/javascript" src="streamer/jsmpg.js"></script>
+    <div class="monitor">
+        <div class="screen">
+            <div id="editor"></div>
+        </div>
+    </div>
+    <div id="transmit-panel">
+
+            <div id="transmit-button"></div>
+
+
+
+    </div>
+</div>
+<script type="text/javascript" src="streamer/jsmpg.js"></script>
 </body>
 <script>
-    //var editorMode = ace.require("ace/mode/javascript").Mode;
-
-    //var cssEditor = document.createElement('div');
-    //cssEditor.className = 'css-editor new-styles';
-
-	// Setup the WebSocket connection and start the player
-	var client = new WebSocket('ws://52.37.12.182:8084/' );
-	var canvas = document.getElementById('vision');
-	var player = new jsmpeg(client, {canvas:canvas});
+    // Setup the WebSocket connection and start the player
+    var client = new WebSocket('ws://52.37.12.182:8084/' );
+    var canvas = document.getElementById('vision');
+    var player = new jsmpeg(client, {canvas:canvas});
 
     var editor = ace.edit("editor");
     editor.setTheme("ace/theme/monokai");
@@ -155,6 +186,5 @@
     editor.getSession().setUseWrapMode(true)
     editor.session.setMode("ace/mode/javascript");
     editor.setShowPrintMargin(false);
-
 </script>
 </html>
