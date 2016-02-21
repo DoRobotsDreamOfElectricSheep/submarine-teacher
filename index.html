@@ -85,9 +85,18 @@
         }
 
         #lesson{
+
+
             background: black;
-            height: 76px;
             border-radius: 18px;
+            height: 76px;
+            /*
+            color: orange;
+
+            padding-left: 10px;
+            text-shadow: 0px 0px 1px orange;
+            */
+            overflow: scroll;
         }
         .ace_text-layer {
             text-shadow: 0 0 1px !important;
@@ -111,7 +120,7 @@
             width: 110px;
             height: 44px;
             background: #809E9F;
-            bottom: 38px;
+            bottom: 65px;
             z-index: 5;
             margin: 0 auto;
             padding: 10px;
@@ -130,6 +139,20 @@
             border-left: 0px solid black;
         }
 
+        .code {
+            padding: 5px;
+            font-family: Consolas,Menlo,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New,monospace,serif;
+            margin-bottom: 10px;
+            background-color: #eee;
+            overflow: auto;
+            max-height: 600px;
+            color: black;
+        }
+
+        #lesson .ace_comment {
+            margin-left: -28px;
+            color: #eaeaea !important;
+        }
     </style>
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script src="js/ace/ace.js" type="text/javascript" charset="utf-8"></script>
@@ -163,28 +186,41 @@
 
             <div id="transmit-button"></div>
 
-
-
     </div>
 </div>
 <script type="text/javascript" src="streamer/jsmpg.js"></script>
+<script src="js/submarine-factory.js" type="text/javascript" charset="utf-8"></script>
+<script src="js/submarine-teacher.js" type="text/javascript" charset="utf-8"></script>
 </body>
 <script>
     // Setup the WebSocket connection and start the player
+
     var client = new WebSocket('ws://52.37.12.182:8084/' );
     var canvas = document.getElementById('vision');
     var player = new jsmpeg(client, {canvas:canvas});
 
-    var editor = ace.edit("editor");
-    editor.setTheme("ace/theme/monokai");
-    editor.getSession().setUseWrapMode(true)
-    editor.session.setMode("ace/mode/javascript");
-    editor.setShowPrintMargin(false);
+    var lessonEditor = ace.edit("lesson");
+    lessonEditor.setTheme("ace/theme/monokai");
+    lessonEditor.getSession().setUseWrapMode(true)
+    lessonEditor.session.setMode("ace/mode/javascript");
+    lessonEditor.setShowPrintMargin(false);
+    lessonEditor.renderer.setShowGutter(false);
+    lessonEditor.setOptions({
+        highlightActiveLine: false,
+        readOnly: true
+    });
+
+
 
     var editor = ace.edit("editor");
     editor.setTheme("ace/theme/monokai");
     editor.getSession().setUseWrapMode(true)
     editor.session.setMode("ace/mode/javascript");
     editor.setShowPrintMargin(false);
+
+    var teacher = Teacher.Create(lessonEditor);
+    teacher.nextLesson();
+
+
 </script>
 </html>
