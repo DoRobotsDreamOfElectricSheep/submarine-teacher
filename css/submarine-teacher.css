@@ -259,3 +259,97 @@ body {
 .hidden {
     display: none;
 }
+
+#auto-panel {
+    position: relative;
+}
+
+#auto-panel .button-panel {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    bottom: initial;
+    border-top: 1px solid #799494;
+    box-shadow: -2px 3px 0px 2px #667E7E;
+}
+
+.button-panel.up {
+    top: 34px;
+    left: 120px;
+}
+
+.button-panel.left {
+    top: 86px;
+    left: 24px;
+}
+
+.button-panel.right {
+    top: 86px;
+    left: 216px;
+    padding-left: 18px;
+    padding-right: 0;
+}
+
+.button-panel.down {
+    top: 130px;
+    left: 120px;
+    padding-top: 18px;
+    padding-bottom: 0px;
+}
+
+.button-panel.surface {
+    top: 34px;
+    left: 400px;
+}
+
+.button-panel.dive {
+    top: 130px;
+    left: 400px;
+    padding-top: 18px;
+    padding-bottom: 0px;
+}
+
+.arrow-up, .arrow-surface {
+    width: 0;
+    height: 0;
+    border-left: 30px solid transparent;
+    border-right: 30px solid transparent;
+
+    border-bottom: 50px solid #00c400;
+}
+
+.arrow-down, .arrow-dive {
+    width: 0;
+    height: 0;
+    border-left: 30px solid transparent;
+    border-right: 30px solid transparent;
+
+    border-top: 50px solid #00c400;
+}
+
+.arrow-right {
+    width: 0;
+    height: 0;
+    border-top: 30px solid transparent;
+    border-bottom: 30px solid transparent;
+
+    border-left: 50px solid #00c400;
+}
+
+.arrow-left {
+    width: 0;
+    height: 0;
+    border-top: 30px solid transparent;
+    border-bottom: 30px solid transparent;
+
+    border-right:50px solid #00c400;
+}
+
+.arrow-surface {
+    border-bottom: 50px solid #0062C4;
+}
+
+.arrow-dive{
+    border-top: 50px solid #0062C4;
+}
+
