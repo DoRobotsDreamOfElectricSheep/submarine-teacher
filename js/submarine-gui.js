@@ -27,19 +27,74 @@ $(function(){
     $("#transmit-button").click(function(){
         teacher.execute(editor.getValue());
     });
+
+    var $autoBtn = $('#auto-button');
+    var $lessonBtn = $('#lesson-button');
+    var $lessonPanel = $("#lesson-panel");
+    var $editor = $('#editor-panel');
+    var $autoPanel = $('#auto-panel');
+    var $transmitPanel = $("#transmit-panel");
+    var $subRight = $("#sub-right");
+    var $subLeft = $("#sub-left");
+    var $subForward = $("#sub-forward");
+    var $subBackward = $("#sub-backward");
+    var $subDive = $("#sub-dive");
+    var $subSurface = $("#sub-surface");
+
+    var autoPilot = true;
+    var autoSub = submarineFactory.createSubmarine();
+
+    //CLICK HANDLERS: -----------------------------------------
+
+    $autoBtn.mousedown(function(){
+        autoPilot = true;
+        autoSub.stop();
+
+        $autoBtn.addClass("pressed");
+        $lessonBtn.removeClass("pressed");
+
+        $lessonPanel.css("visibility", "hidden");
+
+        $editor.addClass("hidden");
+        $autoPanel.removeClass("hidden");
+
+        $transmitPanel.addClass("hidden");
+    });
+
+    $lessonBtn.mousedown(function(){
+        autoPilot = false;
+        autoSub.stop();
+
+        $lessonBtn.addClass("pressed");
+        $autoBtn.removeClass("pressed");
+
+        $lessonPanel.css("visibility", "visible");
+
+        $autoPanel.addClass("hidden");
+        $editor.removeClass("hidden");
+
+        $transmitPanel.removeClass("hidden");
+    });
+
+    $subForward.mousedown(function(){ autoSub.moveForward(); });
+    $subForward.mouseup(function(){ autoSub.stop(); });
+
+    $subLeft.mousedown(function(){ autoSub.moveLeft(); });
+    $subLeft.mouseup(function(){ autoSub.stop(); });
+
+    $subRight.mousedown(function(){ autoSub.moveRight(); });
+    $subRight.mouseup(function(){ autoSub.stop(); });
+
+    $subBackward.mousedown(function(){ autoSub.moveBackward(); });
+
+    $subBackward.mouseup(function(){ autoSub.stop(); });
+
+    $subDive.mousedown(function(){ autoSub.moveDown(); });
+    $subDive.mouseup(function(){ autoSub.stop(); });
+
+    $subSurface.mousedown(function(){ autoSub.moveUp(); });
+    $subSurface.mouseup(function(){ autoSub.stop(); });
+
 });
 
-var $autoBtn = $('#auto-button');
-var $lessonBtn = $('#lesson-button');
-var $editor = $('#editor-panel');
-var $autoPanel = $('#auto-panel');
-var $transmitPanel = $("#transmit-panel");
 
-$("#auto-button,#lesson-button").mousedown( function() {
-    $autoBtn.toggleClass("pressed");
-    $lessonBtn.toggleClass("pressed");
-
-    $editor.toggleClass("hidden");
-    $autoPanel.toggleClass("hidden")
-    $transmitPanel.toggleClass("hidden");
-});

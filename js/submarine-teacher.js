@@ -4,7 +4,7 @@ function Submarine() {
 
 var Teacher = (function () {
 
-    var errConsole = $('#lesson');
+    var errConsole;
     var originalExecute = execute;
     var originalSub = Submarine;
     var currentLesson = -1;
@@ -208,9 +208,11 @@ var Teacher = (function () {
 
     function CreateTeacher(lessonEditor) {
         //override the console so that students see output in the interface
+        /*
         console.log = function (message) {
             errConsole.insert("\n" + message);
         };
+        */
 
         lessonOutput = lessonEditor;
         errConsole = lessonEditor;

@@ -92,8 +92,8 @@ var submarineFactory = (function(){
             type: 'POST',
             url: overlordEndpoint,
             data: JSON.stringify(message),
-            success: function () { console.log(message); },
-            error: function(err) { console.log(err); }
+            success: function () { console.log(JSON.stringify(message)); },
+            error: function(err) { console.log(JSON.stringify(err)); }
         });
     }
 
