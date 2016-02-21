@@ -151,6 +151,50 @@ module.exports = {
                 console.log('down with: ' + value);
             });
         });
+    },
+
+    stop: function() {
+        moveForwardPin.write(1, function(err) {
+            if(err) {
+                console.log(err);
+                return;
+            }
+        });
+
+        moveBackwardPin.write(1, function(err) {
+            if(err) {
+                console.log(err);
+                return;
+            }
+        });
+
+        moveLeftPin.write(1, function(err) {
+            if(err) {
+                console.log(err);
+                return;
+            }
+        });
+
+        moveRightPin.write(1, function(err) {
+            if(err) {
+                console.log(err);
+                return;
+            }
+        });
+
+        moveUpPin.write(1, function(err) {
+            if(err) {
+                console.log(err);
+                return;
+            }
+        });
+
+        moveDownPin.write(1, function(err) {
+            if(err) {
+                console.log(err);
+                return;
+            }
+        });
     }
 }
 
