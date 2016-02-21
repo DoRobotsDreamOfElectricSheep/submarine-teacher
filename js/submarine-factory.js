@@ -77,11 +77,11 @@ var submarineFactory = (function(){
     var stop = function(callback) {
         post({cmd: 'stop'});
 
-        isMoveBackward,
-        isMoveForward,
-        isMoveRight,
-        isMoveLeft,
-        isMoveUp,
+        isMoveBackward = false;
+        isMoveForward = false;
+        isMoveRight = false;
+        isMoveLeft = false;
+        isMoveUp = false;
         isMoveDown = false;
 
         return callback;

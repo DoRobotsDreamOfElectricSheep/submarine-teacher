@@ -130,7 +130,7 @@
             box-shadow: -2px 5px 0px 1px #667E7E;
         }
 
-        #transmit-button {
+        .submarine-button {
             width: 106px;
             height: 44px;
             background: #D80000;
@@ -183,9 +183,7 @@
         </div>
     </div>
     <div id="transmit-panel">
-
-            <div id="transmit-button"></div>
-
+            <div id="transmit-button" class="submarine-button"></div>
     </div>
 </div>
 <script type="text/javascript" src="streamer/jsmpg.js"></script>
@@ -210,8 +208,6 @@
         readOnly: true
     });
 
-
-
     var editor = ace.edit("editor");
     editor.setTheme("ace/theme/monokai");
     editor.getSession().setUseWrapMode(true)
@@ -221,6 +217,11 @@
     var teacher = Teacher.Create(lessonEditor);
     teacher.nextLesson();
 
+    $(function(){
+        $("#transmit-button").click(function(){
+            teacher.execute(editor.getValue());
+        });
+    });
 
 </script>
 </html>

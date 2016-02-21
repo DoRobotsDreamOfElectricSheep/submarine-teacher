@@ -7,16 +7,18 @@ var Teacher = (function () {
     var errConsole = $('#lesson');
     var originalExecute = execute;
     var originalSub = Submarine;
-    var currentLesson = 0;
+    var currentLesson = -1;
     var lessonOutput;
 
-    /*
+    //TODO
     var dash = {
-        speedGaugeOn: ,
-        radarOn: ,
-        radarOff: ,
+        speedGaugeOn: function() {return true},
+        speedGaugeOff: function() {return true},
+        radarOn: function() {return true},
+        radarOff: function() {return true},
+        depthGaugeOn: function() {return true},
+        depthGaugeOff: function() {return true}
     }
-    */
 
     var lessons = [
         {
@@ -67,9 +69,9 @@ var Teacher = (function () {
             lesson: function(){
                 Submarine = function() {
                     var sub = submarineFactory.createSubmarine();
-                    var originalForward = sub.moveForward;
-                    sub.moveForward = function(){
-                        originalForward();
+                    var originalRight = sub.moveRight;
+                    sub.moveRight = function(){
+                        originalRight();
                         setTimeout(function(){ sub.stop(); nextLesson();}, 3000);
                     };
 
@@ -206,8 +208,12 @@ var Teacher = (function () {
 
     function CreateTeacher(lessonEditor) {
         //override the console so that students see output in the interface
-        console.log = function (message) { errConsole.insert(lessons[currentLesson].description); }
-        lessonOutput = lessonEditor
+        console.log = function (message) {
+            errConsole.insert("\n" + message);
+        };
+
+        lessonOutput = lessonEditor;
+        errConsole = lessonEditor;
         return {
             getLessonNumber: currentLesson,
             nextLesson: nextLesson,
@@ -231,11 +237,11 @@ var Teacher = (function () {
 
     function nextLesson(){
         resetOverrides();
+        currentLesson++;
         if(currentLesson < lessons.length) {
             lessonOutput.setValue("");
             lessonOutput.insert(lessons[currentLesson].description);
             lessons[currentLesson].lesson();
-            currentLesson++;
         }
     }
 
