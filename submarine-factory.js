@@ -1,12 +1,12 @@
-var submarineFactory = function(){
+var submarineFactory = (function(){
     var overlordEndpoint = 'http://52.11.235.138:4000/cmd';
 
     var isMoveBackward = false;
     var isMoveForward =  false;
     var isMoveRight = false;
-    var isMoveLeft =false;
+    var isMoveLeft = false;
     var isMoveUp = false;
-    var isMoveDown =false;
+    var isMoveDown = false;
 
     var moveForward = function(callback) {
         if(isMoveBackward) {
@@ -112,4 +112,4 @@ var submarineFactory = function(){
     return {
         createSubmarine: createSubmarine
     }
-};
+})();
