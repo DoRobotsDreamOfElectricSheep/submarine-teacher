@@ -20,6 +20,10 @@ app.get('/update', function(req, res) {
     res.send('moveForward');
 });
 
+app.post('/cmd', function(req, res) {
+    res.send();
+});
+
 var server = app.listen(4000, function () {
     var host = server.address().address;
     var port = server.address().port;
