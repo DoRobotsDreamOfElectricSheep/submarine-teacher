@@ -32,14 +32,34 @@ setInterval(function() {
         if(body || body.length) {
             return;
         }
+        try {
+            handleResponse(body);
+        } catch(err) {
+            console.log(err);
+        }
 
-        handleResponse(body);
     });
 },1000);
 
 function handleResponse(response) {
-    if(response === 'moveForward') {
-        controls.moveForward();
+    for(int i = 0; i < body.length; i++) {
+        var cmd = body[i];
+
+        if(cmd === 'moveForward') {
+            controls.moveForward();
+        } else if(cmd === 'moveBackward') {
+            controls.moveBackward();
+        } else if(cmd === 'moveLeft') {
+            controls.moveLeft();
+        } else if(cmd === 'moveRight') {
+            controls.moveRight();
+        } else if(cmd === 'moveUp') {
+            controls.moveUp();
+        } else if(cmd === 'moveDown') {
+            controls.moveDown();
+        } else if(cmd === 'stop') {
+            controls.stop();
+        }
     }
 }
 
@@ -47,7 +67,5 @@ var server = app.listen(3000, function () {
     var host = server.address().address;
     var port = server.address().port;
 
-    // controls.moveForward();
-    // controls.moveBackward();
     console.log('Pi control server listening at http://%s:%s', host, port);
 });
