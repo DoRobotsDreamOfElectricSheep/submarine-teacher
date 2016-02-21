@@ -17,12 +17,25 @@ app.use(function(req, res, next) {
 });
 
 app.get('/update', function(req, res) {
-    res.send('moveForward');
+    var load = work;
+    work = [];
+    res.send(load);
 });
 
 app.post('/cmd', function(req, res) {
+    if(!req.body && !req.body.cmd) {
+        res.send('no cmd sent');
+        return;
+    }
+
+    addWork(req.body.cmd);
     res.send();
 });
+
+var work = [];
+function addWork(cmd) {
+    work.push(cmd)
+}
 
 var server = app.listen(4000, function () {
     var host = server.address().address;
