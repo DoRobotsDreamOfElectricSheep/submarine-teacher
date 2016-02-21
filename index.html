@@ -36,7 +36,7 @@
             <div id="editor"></div>
         </div>
     </div>
-    <div class="button-panel hidden">
+    <div id="transmit-panel" class="button-panel hidden">
         <div id="transmit-button" class="red button">Execute</div>
     </div>
     <div id="auto-panel" class="monitor">
@@ -101,13 +101,17 @@
     var $lessonBtn = $('#lesson-button');
     var $editor = $('#editor-panel');
     var $autoPanel = $('#auto-panel');
+    var $transmitPanel = $("#transmit-panel");
+
     $("#auto-button,#lesson-button").mousedown( function() {
         $autoBtn.toggleClass("pressed");
         $lessonBtn.toggleClass("pressed");
 
         $editor.toggleClass("hidden");
-        $autoPanel.toggleClass("hidden");
+        $autoPanel.toggleClass("hidden")
+        $transmitPanel.toggleClass("hidden");
     });
+
 </script>
 </html>
 

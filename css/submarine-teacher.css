@@ -256,6 +256,12 @@ body {
     box-shadow: inset -2px 3px 0px 0px #036800 !important;
 }
 
+#auto-panel .button-panel:active {
+    border-bottom: 1px solid #799494;
+    border-left: 1px solid #799494;
+    box-shadow: inset -2px 3px 0px 2px #667E7E;
+}
+
 .hidden {
     display: none;
 }
