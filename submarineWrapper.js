@@ -1,99 +1,115 @@
-var submarine = {
-    overlordEndpoint: 'http://52.11.235.138:4000/cmd',
+var submarineFactory = function(){
+    var overlordEndpoint = 'http://52.11.235.138:4000/cmd';
 
-    isMoveBackward: false,
-    isMoveForward: false,
-    isMoveRight: false,
-    isMoveLeft: false,
-    isMoveUp: false,
-    isMoveDown:false,
+    var isMoveBackward = false;
+    var isMoveForward =  false;
+    var isMoveRight = false;
+    var isMoveLeft =false;
+    var isMoveUp = false;
+    var isMoveDown =false;
 
-    moveForward: function(callback) {
-        if(submarine.isMoveBackward) {
+    var moveForward = function(callback) {
+        if(isMoveBackward) {
             return(callback('cannot move forwards while moving backwards'));
         }
 
-        submarine.post({cmd: 'moveForward'});
-        submarine.isMoveForward = true;
+        post({cmd: 'moveForward'});
+        isMoveForward = true;
 
         return callback;
-    },
+    }
 
-    moveBackward: function(callback) {
-        if(submarine.isMoveForward) {
+    var moveBackward = function(callback) {
+        if(isMoveForward) {
             return(callback('cannot move backwards while moving forwards'));
         }
 
-        submarine.post({cmd: 'moveBackward'});
-        submarine.isMoveBackward = true;
+        post({cmd: 'moveBackward'});
+        isMoveBackward = true;
 
         return callback;
-    },
+    }
 
-    moveLeft: function(callback) {
-        if(submarine.isMoveRight) {
+    var moveLeft = function(callback) {
+        if(isMoveRight) {
             return(callback('cannot move left while moving right'));
         }
 
-        submarine.post({cmd: 'moveLeft'});
-        submarine.isMoveLeft = true;
+        post({cmd: 'moveLeft'});
+        isMoveLeft = true;
 
         return callback;
-    },
+    }
 
-    moveRight: function(callback) {
-        if(submarine.isMoveLeft) {
+    var moveRight = function(callback) {
+        if(isMoveLeft) {
             return(callback('cannot move right while moving left'));
         }
 
-        submarine.post({cmd: 'moveRight'});
-        submarine.isMoveRight = true;
+        post({cmd: 'moveRight'});
+        isMoveRight = true;
 
         return callback;
-    },
+    }
 
-    moveUp: function(callback) {
-        if(submarine.isMoveUp) {
+    var moveUp = function(callback) {
+        if(isMoveUp) {
             return(callback('cannot move up while moving down'));
         }
 
-        submarine.post({cmd: 'moveUp'});
-        submarine.isMoveUp = true;
+        post({cmd: 'moveUp'});
+        isMoveUp = true;
 
         return callback;
-    },
+    }
 
-    moveDown: function(callback) {
-        if(submarine.isMoveDown) {
+    var moveDown = function(callback) {
+        if(isMoveDown) {
             return(callback('cannot move down while moving up'));
         }
 
-        submarine.post({cmd: 'moveDown'});
-        submarine.isMoveDown = true;
+        post({cmd: 'moveDown'});
+        isMoveDown = true;
 
         return callback;
-    },
+    }
 
-    stop: function(callback) {
-        submarine.post({cmd: 'stop'});
+    var stop = function(callback) {
+        post({cmd: 'stop'});
 
-        submarine.isMoveBackward,
-        submarine.isMoveForward,
-        submarine.isMoveRight,
-        submarine.isMoveLeft,
-        submarine.isMoveUp,
-        submarine.isMoveDown = false;
+        isMoveBackward,
+        isMoveForward,
+        isMoveRight,
+        isMoveLeft,
+        isMoveUp,
+        isMoveDown = false;
 
         return callback;
-    },
+    }
 
-    post: function(message) {
+    var post = function(message) {
         $.ajax({
             type: 'POST',
-            url: submarine.overlordEndpoint,
+            url: overlordEndpoint,
             data: JSON.stringify(message),
             success: function () { console.log(message); },
             error: function(err) { console.log(err); }
         });
+    }
+
+    function createSubmarine() {
+        return {
+            moveForward: moveForward,
+            moveBackward: moveBackward,
+            moveLeft: moveLeft,
+            moveRight: moveRight,
+            moveUp: moveUp,
+            moveDown: moveDown,
+            stop: stop
+        }
+    }
+
+    return {
+        createSubmarine: createSubmarine
     }
 };
