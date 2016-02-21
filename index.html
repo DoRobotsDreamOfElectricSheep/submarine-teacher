@@ -1,258 +1,5 @@
 <html><head>
-    <style>
-        html {
-            background: #809E9F;
-        }
-
-        body {
-
-            margin: 0;
-
-        }
-
-        #left-col {
-            float: left;
-        }
-
-        #right-col {
-            float: right;
-        }
-
-        #middle-col {
-            overflow: hidden;
-            height: 100%;
-            position: relative;
-        }
-
-        #left-col, #middle-col, #right-col {
-            min-height:768px;
-        }
-
-        #left-col, #right-col {
-            height: 100%;
-            margin: 0 10px;
-            width: 300px;
-        }
-
-        .panel {
-            position: relative;
-            border: 14px solid transparent;
-            border-radius: 16px;
-            background: linear-gradient(to bottom right, #146764, #081B25);
-            background-clip: padding-box;
-            box-shadow: -1px 2px 1px #667E7E;
-            margin: 10px 0;
-            height: 226px;
-        }
-
-        .panel::after{
-            position: absolute;
-            top: -14px; bottom: -14px;
-            left: -14px; right: -14px;
-            background: linear-gradient(#ACD0D0, #8FAFB0);
-            content: '';
-            z-index: -1;
-            border-radius: 16px;
-        }
-
-        #vision.panel{
-            background: linear-gradient(to bottom, #2CA8DC, #081B25);
-            border-radius: 80px;
-            background-clip: padding-box;
-            height:300px;
-        }
-
-        #vision.panel::after{
-            border-radius: 80px;
-        }
-
-        .monitor {
-            border-radius: 20px;
-            overflow: hidden;
-            /* margin: 10px; */
-            border: 10px solid #ACD0D0;
-            background: #8FAFB0;
-            margin-bottom: 10px;
-
-        }
-        .screen {
-            border: 8px solid #8FAFB0;
-            border-radius: 5px;
-        }
-        #editor{
-            height: 238px;
-            border-radius: 18px;
-            background: rgb(98, 132, 90);
-        }
-
-        #lesson{
-
-
-            background: black;
-            border-radius: 18px;
-            height: 126px;
-            /*
-            color: orange;
-
-            padding-left: 10px;
-            text-shadow: 0px 0px 1px orange;
-            */
-            overflow: scroll;
-        }
-        .ace_text-layer {
-            text-shadow: 0 0 1px !important;
-        }
-
-        .ace-monokai .ace_marker-layer .ace_active-line {
-            background: rgba(20, 103, 100, 0.65) !important;
-        }
-
-        .ace-monokai .ace_gutter {
-            background: rgba(20, 103, 100, 0.65) !important;
-            color: #00E400 !important;
-            text-shadow: 0 0 1px !important;
-        }
-
-        .ace-monokai {
-            background-color: #000000 !important;
-        }
-
-        .button-panel {
-            width: 110px;
-            height: 44px;
-            background: #809E9F;
-            bottom: 65px;
-            z-index: 5;
-            margin: 0 auto;
-            padding: 10px;
-            position: relative;
-            border-radius: 5px;
-            border-right: 1px solid #667E7E;
-            box-shadow: -2px 5px 0px 1px #667E7E;
-        }
-
-        .submarine-button {
-            width: 106px;
-            height: 44px;
-            background: #D80000;
-            border-radius: 20px;
-            margin: 0px auto;
-            border-left: 0px solid black;
-            text-align: center;
-            color: white;
-            font-size: 26px;
-            font-family: sans-serif;
-            line-height: 42px;
-            -webkit-touch-callout: none;
-            -webkit-user-select: none;
-            -khtml-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-        }
-
-        .submarine-button:hover {
-            background: #bb0000;
-        }
-
-        .code {
-            padding: 5px;
-            font-family: Consolas,Menlo,Monaco,Lucida Console,Liberation Mono,DejaVu Sans Mono,Bitstream Vera Sans Mono,Courier New,monospace,serif;
-            margin-bottom: 10px;
-            background-color: #eee;
-            overflow: auto;
-            max-height: 600px;
-            color: black;
-        }
-
-        #lesson .ace_comment {
-            margin-left: -28px;
-            color: #eaeaea !important;
-        }
-
-        .button {
-            filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#c62d1f', endColorstr='#f24437',GradientType=0);
-            -moz-border-radius:18px;
-            -webkit-border-radius:18px;
-            border-radius:18px;
-            display:inline-block;
-            cursor:pointer;
-            color:#ffffff;
-            font-family:Arial;
-            font-size:17px;
-            padding:7px 25px;
-            text-decoration:none;
-            -webkit-touch-callout: none;
-            -webkit-user-select: none;
-            -khtml-user-select: none;
-            -moz-user-select: none;
-            -ms-user-select: none;
-            user-select: none;
-        }
-
-        .red.button:active {
-            position:relative;
-            top:3px;
-            box-shadow: none !important;
-            border: none !important;
-        }
-
-        .red.button {
-             -moz-box-shadow: -2px 4px 0px 0px #8a2a21;
-             -webkit-box-shadow: -2px 4px 0px 0px #8a2a21;
-             box-shadow: -2px 4px 0px 0px #8a2a21;
-             background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #c62d1f), color-stop(1, #f24437));
-             background:-moz-linear-gradient(top, #c62d1f 5%, #f24437 100%);
-             background:-webkit-linear-gradient(top, #c62d1f 5%, #f24437 100%);
-             background:-o-linear-gradient(top, #c62d1f 5%, #f24437 100%);
-             background:-ms-linear-gradient(top, #c62d1f 5%, #f24437 100%);
-             background:linear-gradient(to bottom, #c62d1f 5%, #f24437 100%);
-             background-color:#c62d1f;
-             border:1px solid #d02718;
-             text-shadow:0px 1px 0px #810e05;
-         }
-
-        .green.button {
-            -moz-box-shadow: -2px 4px 0px 0px #036800;
-            -webkit-box-shadow: -2px 4px 0px 0px #036800;
-            box-shadow: -2px 4px 0px 0px #036800;
-            background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #038C00), color-stop(1, #03BA00));
-            background:-moz-linear-gradient(top, #038C00 5%, #03AC00 100%);
-            background:-webkit-linear-gradient(top, #038C00 5%, #03AC00 100%);
-            background:-o-linear-gradient(top, #038C00 5%, #03AC00 100%);
-            background:-ms-linear-gradient(top, #038C00 5%, #03AC00 100%);
-            background:linear-gradient(to bottom, #038C00 5%, #03AC00 100%);
-            background-color:#038C00;
-            text-shadow:0px 1px 0px #036800;
-        }
-
-        #auto-button {
-            font-size: 15px;
-            padding: 8px 22px;
-            margin-bottom: 2px;
-        }
-
-        #ctr-panel {
-            position: absolute;
-            right: 0;
-            top: 334px;
-        }
-        #ctr-panel .button-panel{
-            display: inline-block;
-            border-top: 1px solid #799494;
-            box-shadow: -2px 3px 0px 2px #667E7E;
-            margin-right: 2px;
-        }
-
-        .pressed {
-            position:relative;
-            top:3px;
-            box-shadow: none !important;
-            border: none !important;
-            box-shadow: inset -2px 3px 0px 0px #036800 !important;
-        }
-
-    </style>
+    <link rel="stylesheet" href="css/submarine-teacher.css">
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script src="js/ace/ace.js" type="text/javascript" charset="utf-8"></script>
     <script src="js/ace/theme-monokai.js" type="text/javascript" charset="utf-8"></script>
@@ -284,13 +31,33 @@
             <div id="lesson"></div>
         </div>
     </div>
-    <div class="monitor">
+    <div id="editor-panel" class="monitor hidden">
         <div class="screen">
             <div id="editor"></div>
         </div>
     </div>
-    <div class="button-panel">
+    <div class="button-panel hidden">
         <div id="transmit-button" class="red button">Execute</div>
+    </div>
+    <div id="auto-panel" class="monitor">
+        <div class="button-panel">
+            <div class="green button pressed">Auto-Pilot</div>
+        </div>
+        <div class="button-panel">
+            <div class="green button">Lessons</div>
+        </div>
+        <div class="button-panel">
+            <div class="green button pressed">Auto-Pilot</div>
+        </div>
+        <div class="button-panel">
+            <div class="green button">Lessons</div>
+        </div>
+        <div class="button-panel">
+            <div class="green button pressed">Auto-Pilot</div>
+        </div>
+        <div class="button-panel">
+            <div class="green button">Lessons</div>
+        </div>
     </div>
 </div>
 <script type="text/javascript" src="streamer/jsmpg.js"></script>
@@ -332,9 +99,14 @@
 
     var $autoBtn = $('#auto-button');
     var $lessonBtn = $('#lesson-button');
+    var $editor = $('#editor-panel');
+    var $autoPanel = $('#auto-panel');
     $("#auto-button,#lesson-button").mousedown( function() {
         $autoBtn.toggleClass("pressed");
         $lessonBtn.toggleClass("pressed");
+
+        $editor.toggleClass("hidden");
+        $autoPanel.toggleClass("hidden");
     });
 </script>
 </html>
