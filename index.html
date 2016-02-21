@@ -1,0 +1,155 @@
+<html>
+<head>
+    <style>
+        html {
+            background: #809E9F;
+        }
+
+        body {
+
+            margin: 0;
+
+        }
+
+        #left-col {
+            float: left;
+        }
+
+        #right-col {
+            float: right;
+        }
+
+        #middle-col {
+            overflow: hidden;
+            height: 100%;
+        }
+
+        #left-col, #middle-col, #right-col {
+            min-height:768px;
+        }
+
+        #left-col, #right-col {
+            height: 100%;
+            margin: 0 10px;
+            width: 300px;
+        }
+
+        .panel {
+            position: relative;
+            border: 14px solid transparent;
+            border-radius: 16px;
+            background: linear-gradient(to bottom right, #146764, #081B25);
+            background-clip: padding-box;
+            box-shadow: -1px 2px 1px #667E7E;
+            margin: 10px 0;
+            height: 226px;
+        }
+
+        .panel::after{
+            position: absolute;
+            top: -14px; bottom: -14px;
+            left: -14px; right: -14px;
+            background: linear-gradient(#ACD0D0, #8FAFB0);
+            content: '';
+            z-index: -1;
+            border-radius: 16px;
+        }
+
+        #vision.panel{
+            background: linear-gradient(to bottom, #2CA8DC, #081B25);
+            border-radius: 80px;
+            background-clip: padding-box;
+            height:300px;
+        }
+
+        #vision.panel::after{
+            border-radius: 80px;
+        }
+
+        #editor-monitor {
+            border-radius: 20px;
+            overflow: hidden;
+            /* margin: 10px; */
+            border: 10px solid #ACD0D0;
+            background: #8FAFB0;
+
+        }
+        #editor-screen {
+            border: 8px solid #8FAFB0;
+            border-radius: 5px;
+        }
+        #editor{
+            height: 412px;
+            border-radius: 18px;
+            background: rgb(98, 132, 90);
+        }
+
+        .ace_text-layer {
+            text-shadow: 0 0 1px !important;
+        }
+
+        .ace-monokai .ace_marker-layer .ace_active-line {
+            background: rgba(20, 103, 100, 0.65) !important;
+        }
+
+        .ace-monokai .ace_gutter {
+            background: rgba(20, 103, 100, 0.65) !important;
+            color: #00E400 !important;
+            text-shadow: 0 0 1px !important;
+        }
+
+        .ace-monokai {
+            background-color: #000000 !important;
+        }
+
+    </style>
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="js/ace/ace.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/ace/theme-monokai.js" type="text/javascript" charset="utf-8"></script>
+    <script src="js/ace/mode-css.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+    <div id="left-col">
+        <div class="panel"></div>
+        <div class="panel"></div>
+        <div class="panel"></div>
+    </div>
+    <div id="right-col">
+        <div class="panel"></div>
+        <div class="panel"></div>
+        <div class="panel"></div>
+    </div>
+    <div id="middle-col">
+        <div id="vision" class="panel"></div>
+        <div class="monitor">
+            <div class="screen">
+                <div id="lesson"></div>
+            </div>
+        </div>
+        <div class="monitor">
+            <div class="screen">
+                <div id="editor"></div>
+            </div>
+        </div>
+    </div>
+</body>
+<script>
+    //var editorMode = ace.require("ace/mode/javascript").Mode;
+
+    //var cssEditor = document.createElement('div');
+    //cssEditor.className = 'css-editor new-styles';
+
+    var editor = ace.edit("editor");
+    editor.setTheme("ace/theme/monokai");
+    editor.getSession().setUseWrapMode(true)
+    editor.session.setMode("ace/mode/javascript");
+    editor.setShowPrintMargin(false);
+
+    var editor = ace.edit("editor");
+    editor.setTheme("ace/theme/monokai");
+    editor.getSession().setUseWrapMode(true)
+    editor.session.setMode("ace/mode/javascript");
+    editor.setShowPrintMargin(false);
+
+</script>
+</html>
