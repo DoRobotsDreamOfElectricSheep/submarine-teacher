@@ -1,0 +1,15 @@
+{
+  "name": "streamer",
+  "version": "1.0.0",
+  "description": "streaming service for live video",
+  "main": "stream-server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "forever": "^0.15.1",
+    "ws": "^1.0.1"
+  }
+}
