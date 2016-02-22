@@ -328,8 +328,9 @@ body {
     padding-left: 18px;
     padding-right: 0;
     background-image: url("https://s3-us-west-2.amazonaws.com/dev-alex/sonar.png");
-    background-size: contain;
     background-repeat: no-repeat;
+    background-size: 65px 65px;
+    background-position: 7px 7px;
 }
 
 .button-panel#sub-ir {
@@ -338,8 +339,9 @@ body {
     padding-left: 18px;
     padding-right: 0;
     background-image: url("https://s3-us-west-2.amazonaws.com/dev-alex/ir.png");
-    background-size: contain;
     background-repeat: no-repeat;
+    background-size: 65px 65px;
+    background-position: 7px 7px;
 }
 
 .arrow-up, .arrow-surface {
