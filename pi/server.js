@@ -29,7 +29,7 @@ setInterval(function() {
             return;
         }
 
-        if(body || body.length) {
+        if(!body || !body.length) {
             return;
         }
         try {
