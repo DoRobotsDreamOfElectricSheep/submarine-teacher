@@ -8,6 +8,10 @@ body {
 
 }
 
+#playerQueue {
+    color: yellow;
+}
+
 #left-col {
     float: left;
 }
@@ -358,4 +362,3 @@ body {
 .arrow-dive{
     border-top: 50px solid #0062C4;
 }
-
