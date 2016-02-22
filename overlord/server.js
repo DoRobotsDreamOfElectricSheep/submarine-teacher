@@ -85,9 +85,10 @@ app.post('/user', function(req, res) {
     }
 
     var name = queue.add(uid, isJudge);
-    if(name.tryAndKill && !currentUser.isJudge) {
+    if(currentUser != null && name.tryAndKill && !currentUser.isJudge) {
         currentUser.kill = true;
     }
+
     res.send(name.username);
 });
 
