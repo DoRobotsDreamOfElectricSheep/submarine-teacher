@@ -388,10 +388,11 @@ body {
     border-top: 50px solid #0062C4;
 }
 
-.sonar-icon {
-
-}
-
-.ir-icon {
-
+#cross-section{
+    background-image: url("https://s3-us-west-2.amazonaws.com/dev-alex/cross_section.png");
+    background-size: 98%;
+    background-repeat: no-repeat;
+    height: 100%;
+    background-position-x: 3px;
+    background-position-y: 80px;
 }
