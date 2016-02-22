@@ -52,8 +52,10 @@ function handleResponse(response) {
         } else if(cmd === 'moveBackward') {
             controls.moveBackward();
         } else if(cmd === 'moveLeft') {
+            controls.moveForward();
             controls.moveLeft();
         } else if(cmd === 'moveRight') {
+            controls.moveForward();
             controls.moveRight();
         } else if(cmd === 'moveUp') {
             controls.moveUp();
