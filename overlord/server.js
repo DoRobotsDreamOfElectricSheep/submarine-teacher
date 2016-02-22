@@ -66,9 +66,10 @@ app.post('/cmd', function(req, res) {
         return;
     }
 
-    if(req.body.uid === currentPlayingUser) {
+    // if(req.body.uid === currentPlayingUser) {
+        console.log('adding work');
         addWork(req.body.cmd);
-    }
+    // }
 
     res.send();
 });
@@ -85,9 +86,10 @@ app.post('/user', function(req, res) {
     }
 
     var name = queue.add(uid, isJudge);
-    if(name.tryAndKill && !currentUser.isJudge) {
+    if(currentUser != null && name.tryAndKill && !currentUser.isJudge) {
         currentUser.kill = true;
     }
+
     res.send(name.username);
 });
 

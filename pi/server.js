@@ -29,11 +29,12 @@ setInterval(function() {
             return;
         }
 
-        if(body || body.length) {
+        var response = JSON.parse(body)
+        if(!response || response.length == 0) {
             return;
         }
         try {
-            handleResponse(body);
+            handleResponse(response);
         } catch(err) {
             console.log(err);
         }
@@ -42,16 +43,19 @@ setInterval(function() {
 },1000);
 
 function handleResponse(response) {
-    for(int i = 0; i < body.length; i++) {
-        var cmd = body[i];
-
+    console.log(response);
+    for(i = 0; i < response.length; i++) {
+        var cmd = response[i];
+        console.log(cmd);
         if(cmd === 'moveForward') {
             controls.moveForward();
         } else if(cmd === 'moveBackward') {
             controls.moveBackward();
         } else if(cmd === 'moveLeft') {
+            controls.moveForward();
             controls.moveLeft();
         } else if(cmd === 'moveRight') {
+            controls.moveForward();
             controls.moveRight();
         } else if(cmd === 'moveUp') {
             controls.moveUp();
