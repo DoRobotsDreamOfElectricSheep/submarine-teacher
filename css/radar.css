@@ -1,0 +1,8 @@
+#radar {
+    background: linear-gradient(to bottom right, #146764, #111);
+    border-radius: 100%;
+    display: block;
+    left: 174px;
+    position: absolute;
+    top: 415px;
+}

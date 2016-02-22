@@ -94,7 +94,6 @@ $(function(){
 
     $subSurface.mousedown(function(){ autoSub.moveUp(); });
     $subSurface.mouseup(function(){ autoSub.stop(); });
-
 });
 
 
