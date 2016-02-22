@@ -6,6 +6,8 @@ var queue = require('./queue.js');
 var app = express();
 
 var currentPlayingUser = '';
+var currentUser = null;
+var kill = false;
 var lastHeardFromCurrentUser = Date.now();
 
 // parse application/x-www-form-urlencoded
@@ -27,7 +29,7 @@ app.get('/update', function(req, res) {
 });
 
 app.post('/userlist', function(req, res) {
-    if(!req.body && !req.body.uid) {
+    if(!req.body || !req.body.uid) {
         res.send('no uid sent');
         return;
     }
@@ -36,6 +38,7 @@ app.post('/userlist', function(req, res) {
     var list = queue.getList(req.body.uid)
     if(list.isTurn) {
         statusCode = 43434230;
+        currentUser = list.user;
         queue.pop();
         currentPlayingUser = req.body.uid;
     }
@@ -44,12 +47,12 @@ app.post('/userlist', function(req, res) {
 });
 
 app.post('/ping', function(req, res) {
-    if(!req.body && !req.body.uid) {
+    if(!req.body || !req.body.uid) {
         res.send('no uid sent');
         return;
     }
 
-    if(req.body.uid === currentPlayingUser) {
+    if(req.body.uid === currentPlayingUser && currentUser.kill == false) {
         lastHeardFromCurrentUser = Date.now();
     }
 
@@ -58,24 +61,34 @@ app.post('/ping', function(req, res) {
 });
 
 app.post('/cmd', function(req, res) {
-    if(!req.body && !req.body.cmd) {
+    if(!req.body || !req.body.cmd || !req.body.uid) {
         res.send('no cmd sent');
         return;
     }
 
-    addWork(req.body.cmd);
+    if(req.body.uid === currentPlayingUser) {
+        addWork(req.body.cmd);
+    }
+
     res.send();
 });
 
 app.post('/user', function(req, res) {
-    if(!req.body && !req.body.uid) {
+    if(!req.body || !req.body.uid) {
         res.send('no uid sent');
         return;
     }
     var uid = req.body.uid;
-    var name = queue.add(uid);
+    var isJudge = false;
+    if(req.body.j) {
+        isJudge = true;
+    }
 
-    res.send(name);
+    var name = queue.add(uid, isJudge);
+    if(name.tryAndKill && !currentUser.isJudge) {
+        currentUser.kill = true;
+    }
+    res.send(name.username);
 });
 
 setInterval(function() {

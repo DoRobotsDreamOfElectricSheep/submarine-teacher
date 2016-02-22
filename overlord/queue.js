@@ -1,5 +1,6 @@
 var users = [];
 var globalUserNumber = 0
+var globalJudgeNumber = 0
 var onGoingSession = false;
 
 module.exports = {
@@ -8,16 +9,30 @@ module.exports = {
         onGoingSession = false;
     },
 
-    add: function(uid) {
-        var username = 'user' + globalUserNumber++;
+    add: function(uid, isJudge) {
+        var username
+        if(isJudge) {
+            username = 'VIP' + globalJudgeNumber++
+        } else {
+            username = 'user' + globalUserNumber++;
+        }
         user = {
             name: username,
             uid: uid,
+            isJudge: isJudge,
+            kill: false,
             lastHeardFrom: Date.now()
         };
 
-        users.push(user);
-        return username;
+        var tryAndKill = false;
+        if(isJudge) {
+            users.unshift(user)
+            tryAndKill = true;
+        } else {
+            users.push(user);
+        }
+
+        return {username: username, tryAndKill: tryAndKill}
     },
 
     pop: function() {
@@ -54,7 +69,8 @@ module.exports = {
 
         return {
             isTurn: isTurn,
-            queue: userArray
+            queue: userArray,
+            user: users[0]
         }
     }
 }
