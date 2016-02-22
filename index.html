@@ -6,6 +6,7 @@
     <script src="js/ace/theme-monokai.js" type="text/javascript" charset="utf-8"></script>
     <script src="js/ace/mode-css.js" type="text/javascript" charset="utf-8"></script>
     <link rel="stylesheet" href="css/radar.css">
+    <link rel="stylesheet" href="css/speed-gauge.css">
 </head>
 <body>
 <div id="left-col">
@@ -13,7 +14,16 @@
     <div class="panel">
     </div>
     <div id="radar"></div>
-    <div class="panel"></div>
+    <div class="panel">
+        <div class="container">
+            <div class="gauge-a"></div>
+            <div class="gauge-b"></div>
+            <div class="gauge-c"></div>
+            <div class="gauge-data">
+                <h1 id="percent">0%</h1>
+            </div>
+        </div>
+    </div>
 </div>
 <div id="right-col">
     <div id="playerQueue" class="panel"></div>
