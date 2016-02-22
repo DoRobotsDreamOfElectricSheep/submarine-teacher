@@ -5,7 +5,7 @@ var queue = require('./queue.js');
 
 var app = express();
 
-var currentPlayingUser = '';
+var currentPlayingUser = null;
 var currentUser = null;
 var kill = false;
 var lastHeardFromCurrentUser = Date.now();
@@ -40,7 +40,7 @@ app.post('/userlist', function(req, res) {
         statusCode = 43434230;
         currentUser = list.user;
         queue.pop();
-        currentPlayingUser = req.body.uid;
+        currentPlayingUser = list.user.uid;
     }
 
     res.send({statusCode: statusCode, queue: list.queue});
@@ -52,12 +52,15 @@ app.post('/ping', function(req, res) {
         return;
     }
 
-    if(req.body.uid === currentPlayingUser && currentUser.kill == false) {
+    var statusCode = 3423435;
+    if(req.body.uid === currentPlayingUser && currentUser.kill == true) {
+        statusCode = 089080;
+    } else {
         lastHeardFromCurrentUser = Date.now();
     }
 
     var list = queue.getList(req.body.uid);
-    res.send({queue: list.queue});
+    res.send({queue: list.queue, statusCode: statusCode});
 });
 
 app.post('/cmd', function(req, res) {
@@ -66,10 +69,11 @@ app.post('/cmd', function(req, res) {
         return;
     }
 
-    // if(req.body.uid === currentPlayingUser) {
+    console.log('command');
+    if(req.body.uid === currentPlayingUser) {
         console.log('adding work');
         addWork(req.body.cmd);
-    // }
+    }
 
     res.send();
 });

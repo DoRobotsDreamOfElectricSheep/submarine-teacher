@@ -4,6 +4,7 @@ var endpoint = 'http://52.11.235.138:4000';
 // var endpoint = 'http://localhost:4000';
 var uid = '';
 var username = '';
+var canPlay = false;
 var canvas = document.getElementById('vision');
 var player = new jsmpeg(client, {canvas:canvas});
 
@@ -27,9 +28,10 @@ editor.setShowPrintMargin(false);
 var teacher = Teacher.Create(lessonEditor);
 teacher.nextLesson();
 
-var $playerQueue = $("#playerQueue");
-
 $(function(){
+    uid = getGuid();
+
+
     $("#transmit-button").click(function(){
         teacher.execute(editor.getValue());
     });
@@ -46,10 +48,13 @@ $(function(){
     var $subBackward = $("#sub-backward");
     var $subDive = $("#sub-dive");
     var $subSurface = $("#sub-surface");
+    var $playerQueue = $("#playerQueue");
+    var $blocker = $(".blocker");
 
+    disable();
 
     var autoPilot = true;
-    var autoSub = submarineFactory.createSubmarine();
+    var autoSub = submarineFactory.createSubmarine(uid);
 
     //CLICK HANDLERS: -----------------------------------------
 
@@ -101,10 +106,29 @@ $(function(){
 
     $subSurface.mousedown(function(){ autoSub.moveUp(); });
     $subSurface.mouseup(function(){ autoSub.stop(); });
-});
 
-(function() {
-    uid = getGuid();
+    function updatePlayerQueue(players) {
+        $playerQueue.text('');
+        for (var i in players) {
+            var position = parseInt(i) + 1;
+            if(username === players[i]) {
+                $playerQueue.append(position + '. you</br>');
+            } else {
+                $playerQueue.append(position + '. ' + players[i] + '</br>');
+            }
+        }
+    }
+
+    function getGuid() {
+        return (
+            'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+                var r = Math.random() * 16 | 0,
+                    v = c == 'x' ? r : (r & 0x3 | 0x8);
+                return v.toString(16);
+            })
+        );
+    }
+
     $.post(endpoint + '/user', {uid: uid}, function(resp) {
         if(resp === null || !resp.length) {
             return;
@@ -117,52 +141,52 @@ $(function(){
             if(resp.statusCode === 43434230) {
                 updatePlayerQueue(resp.queue);
                 startPinging();
+                enable();
                 return;
             }
             startPolling();
         })
     })
-})();
 
-function updatePlayerQueue(players) {
-    $playerQueue.text('');
-    for (var i in players) {
-        var position = parseInt(i) + 1;
-        if(username === players[i]) {
-            $playerQueue.append(position + '. you</br>');
-        } else {
-            $playerQueue.append(position + '. ' + players[i] + '</br>');
-        }
-    }
-}
-
-function getGuid() {
-    return (
-        'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-            var r = Math.random() * 16 | 0,
-                v = c == 'x' ? r : (r & 0x3 | 0x8);
-            return v.toString(16);
-        })
-    );
-}
-
-function startPinging() {
-    clearInterval(pollId);
-    setInterval(function() {
-        $.post(endpoint + '/ping', {uid: uid}, function(resp) {
-            updatePlayerQueue(resp.queue);
-        })
-    },3000);
-}
-
-var pollId = null;
-function startPolling() {
-    pollId = setInterval(function() {
-        $.post(endpoint + '/userlist', {uid: uid}, function(resp) {
-            if(resp.statusCode === 43434230) {
-                startPinging();
+    var pingId;
+    var isKilled = false;
+    function startPinging() {
+        clearInterval(pollId);
+        pingId = setInterval(function() {
+            if(isKilled) {
+                return;
             }
-            updatePlayerQueue(resp.queue);
-        })
-    },4000);
-}
+            $.post(endpoint + '/ping', {uid: uid}, function(resp) {
+                console.log(resp.statusCode);
+                if(resp.statusCode === 089080) {
+                    isKilled = true;
+                    alert("Someone more important than you needs a turn.");
+                    disable();
+                    return;
+                }
+                updatePlayerQueue(resp.queue);
+            })
+        },3000);
+    }
+
+    var pollId = null;
+    function startPolling() {
+        pollId = setInterval(function() {
+            $.post(endpoint + '/userlist', {uid: uid}, function(resp) {
+                updatePlayerQueue(resp.queue);
+                if(resp.statusCode === 43434230) {
+                    startPinging();
+                    enable();
+                }
+            })
+        },4000);
+    }
+
+    function disable() {
+        $blocker.show();
+    }
+
+    function enable() {
+        $blocker.hide();
+    }
+});
