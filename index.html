@@ -10,25 +10,35 @@
 </head>
 <body>
 <div id="left-col">
-    <div class="panel"></div>
+    <div class="panel">
+        <div id="cross-section"></div>
+    </div>
     <div class="panel">
     </div>
     <div id="radar"></div>
     <div class="panel">
-        <div class="container">
+        <div id="engine1-gauge" class="container">
             <div class="gauge-a"></div>
             <div class="gauge-b"></div>
             <div class="gauge-c"></div>
-            <div class="gauge-data">
-                <h1 id="percent">0%</h1>
-            </div>
         </div>
+        <div id="engine1-lbl">Engine 1</div>
+        <div id="engine2-gauge" class="container">
+            <div class="gauge-a"></div>
+            <div class="gauge-b"></div>
+            <div class="gauge-c"></div>
+        </div>
+        <div id="engine2-lbl">Engine 2</div>
     </div>
 </div>
 <div id="right-col">
     <div id="playerQueue" class="panel"></div>
-    <div class="panel"></div>
-    <div class="panel"></div>
+    <div class="panel">
+        <div id="ballast"></div>
+    </div>
+    <div class="panel">
+        <div id="metrics"></div>
+    </div>
 </div>
 <div id="middle-col">
     <canvas id="vision" class="panel"></canvas>
@@ -73,6 +83,12 @@
         </div>
         <div class="button-panel dive" id="sub-dive">
             <div class="arrow-dive"></div>
+        </div>
+        <div class="button-panel" id="sub-ir">
+
+        </div>
+        <div class="button-panel" id="sub-sonar">
+
         </div>
     </div>
 </div>

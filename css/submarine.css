@@ -104,6 +104,9 @@ body {
     height: 253px;
 }
 
+#lesson-panel{
+    visibility: hidden;
+}
 #lesson{
     background: black;
     border-radius: 18px;
@@ -318,14 +321,36 @@ body {
 
 .button-panel.surface {
     top: 34px;
-    left: 400px;
+    left: 350px;
 }
 
 .button-panel.dive {
     top: 130px;
-    left: 400px;
+    left: 350px;
     padding-top: 18px;
     padding-bottom: 0px;
+}
+
+.button-panel#sub-sonar {
+    top: 86px;
+    left: 490px;
+    padding-left: 18px;
+    padding-right: 0;
+    background-image: url("https://s3-us-west-2.amazonaws.com/dev-alex/sonar.png");
+    background-repeat: no-repeat;
+    background-size: 65px 65px;
+    background-position: 7px 7px;
+}
+
+.button-panel#sub-ir {
+    top: 86px;
+    left: 600px;
+    padding-left: 18px;
+    padding-right: 0;
+    background-image: url("https://s3-us-west-2.amazonaws.com/dev-alex/ir.png");
+    background-repeat: no-repeat;
+    background-size: 65px 65px;
+    background-position: 7px 7px;
 }
 
 .arrow-up, .arrow-surface {
@@ -370,4 +395,13 @@ body {
 
 .arrow-dive{
     border-top: 50px solid #0062C4;
+}
+
+#cross-section{
+    background-image: url("https://s3-us-west-2.amazonaws.com/dev-alex/cross_section.png");
+    background-size: 98%;
+    background-repeat: no-repeat;
+    height: 100%;
+    background-position-x: 3px;
+    background-position-y: 80px;
 }
