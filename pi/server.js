@@ -45,7 +45,7 @@ function handleResponse(response) {
     console.log(response);
     for(i = 0; i < response.length; i++) {
         var cmd = response[i];
-
+        console.log(cmd);
         if(cmd === 'moveForward') {
             controls.moveForward();
         } else if(cmd === 'moveBackward') {
