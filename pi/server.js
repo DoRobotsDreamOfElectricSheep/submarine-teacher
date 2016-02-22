@@ -29,7 +29,7 @@ setInterval(function() {
             return;
         }
 
-        if(!body || body.length === 0) {
+        if(!body || body.length == 0) {
             return;
         }
         try {
@@ -41,10 +41,10 @@ setInterval(function() {
     });
 },1000);
 
-function handleResponse(response, body) {
+function handleResponse(response) {
     console.log(response);
-    for(i = 0; i < body.length; i++) {
-        var cmd = body[i];
+    for(i = 0; i < response.length; i++) {
+        var cmd = response[i];
 
         if(cmd === 'moveForward') {
             controls.moveForward();
