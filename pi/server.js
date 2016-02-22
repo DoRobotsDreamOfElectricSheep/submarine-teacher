@@ -42,6 +42,7 @@ setInterval(function() {
 },1000);
 
 function handleResponse(response) {
+    console.log(response);
     for(i = 0; i < body.length; i++) {
         var cmd = body[i];
 
