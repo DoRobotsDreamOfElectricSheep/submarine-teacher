@@ -29,11 +29,12 @@ setInterval(function() {
             return;
         }
 
-        if(!body || body.length == 0) {
+        var response = JSON.parse(body)
+        if(!response || response.length == 0) {
             return;
         }
         try {
-            handleResponse(body);
+            handleResponse(response);
         } catch(err) {
             console.log(err);
         }
