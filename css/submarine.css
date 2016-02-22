@@ -312,14 +312,34 @@ body {
 
 .button-panel.surface {
     top: 34px;
-    left: 400px;
+    left: 350px;
 }
 
 .button-panel.dive {
     top: 130px;
-    left: 400px;
+    left: 350px;
     padding-top: 18px;
     padding-bottom: 0px;
+}
+
+.button-panel#sub-sonar {
+    top: 86px;
+    left: 490px;
+    padding-left: 18px;
+    padding-right: 0;
+    background-image: url("https://s3-us-west-2.amazonaws.com/dev-alex/sonar.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
+.button-panel#sub-ir {
+    top: 86px;
+    left: 600px;
+    padding-left: 18px;
+    padding-right: 0;
+    background-image: url("https://s3-us-west-2.amazonaws.com/dev-alex/ir.png");
+    background-size: contain;
+    background-repeat: no-repeat;
 }
 
 .arrow-up, .arrow-surface {
@@ -364,4 +384,12 @@ body {
 
 .arrow-dive{
     border-top: 50px solid #0062C4;
+}
+
+.sonar-icon {
+
+}
+
+.ir-icon {
+
 }
