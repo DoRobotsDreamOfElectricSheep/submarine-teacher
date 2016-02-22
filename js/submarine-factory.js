@@ -1,5 +1,6 @@
 var submarineFactory = (function(){
-    var overlordEndpoint = 'http://52.11.235.138:4000/cmd';
+    // var overlordEndpoint = 'http://52.11.235.138:4000/cmd';
+    var overlordEndpoint = 'http://localhost:4000/cmd';
 
     var isMoveBackward = false;
     var isMoveForward =  false;
@@ -7,13 +8,14 @@ var submarineFactory = (function(){
     var isMoveLeft = false;
     var isMoveUp = false;
     var isMoveDown = false;
+    var uid;
 
     var moveForward = function(callback) {
         if(isMoveBackward) {
             return(callback('cannot move forwards while moving backwards'));
         }
 
-        post({cmd: 'moveForward'});
+        post({cmd: 'moveForward', uid: uid});
         isMoveForward = true;
 
         return callback;
@@ -24,7 +26,7 @@ var submarineFactory = (function(){
             return(callback('cannot move backwards while moving forwards'));
         }
 
-        post({cmd: 'moveBackward'});
+        post({cmd: 'moveBackward', uid: uid});
         isMoveBackward = true;
 
         return callback;
@@ -35,7 +37,7 @@ var submarineFactory = (function(){
             return(callback('cannot move left while moving right'));
         }
 
-        post({cmd: 'moveLeft'});
+        post({cmd: 'moveLeft', uid: uid});
         isMoveLeft = true;
 
         return callback;
@@ -46,18 +48,18 @@ var submarineFactory = (function(){
             return(callback('cannot move right while moving left'));
         }
 
-        post({cmd: 'moveRight'});
+        post({cmd: 'moveRight', uid: uid});
         isMoveRight = true;
 
         return callback;
     }
 
     var moveUp = function(callback) {
-        if(isMoveUp) {
+        if(isMoveDown) {
             return(callback('cannot move up while moving down'));
         }
 
-        post({cmd: 'moveUp'});
+        post({cmd: 'moveUp', uid: uid});
         isMoveUp = true;
 
         return callback;
@@ -68,14 +70,14 @@ var submarineFactory = (function(){
             return(callback('cannot move down while moving up'));
         }
 
-        post({cmd: 'moveDown'});
+        post({cmd: 'moveDown', uid: uid});
         isMoveDown = true;
 
         return callback;
     }
 
     var stop = function(callback) {
-        post({cmd: 'stop'});
+        post({cmd: 'stop', uid: uid});
 
         isMoveBackward = false;
         isMoveForward = false;
@@ -91,13 +93,14 @@ var submarineFactory = (function(){
         $.ajax({
             type: 'POST',
             url: overlordEndpoint,
-            data: JSON.stringify(message),
+            data: message,
             success: function () { console.log(JSON.stringify(message)); },
             error: function(err) { console.log(JSON.stringify(err)); }
         });
     }
 
-    function createSubmarine() {
+    function createSubmarine(userId) {
+        uid = userId;
         return {
             moveForward: moveForward,
             moveBackward: moveBackward,

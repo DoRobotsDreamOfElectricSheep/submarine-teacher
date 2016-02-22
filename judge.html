@@ -1,15 +1,29 @@
+<!DOCTYPE html>
 <html><head>
     <link rel="stylesheet" href="css/submarine.css">
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <script src="js/ace/ace.js" type="text/javascript" charset="utf-8"></script>
     <script src="js/ace/theme-monokai.js" type="text/javascript" charset="utf-8"></script>
     <script src="js/ace/mode-css.js" type="text/javascript" charset="utf-8"></script>
+    <link rel="stylesheet" href="css/radar.css">
+    <link rel="stylesheet" href="css/speed-gauge.css">
 </head>
 <body>
 <div id="left-col">
     <div class="panel"></div>
-    <div class="panel"></div>
-    <div class="panel"></div>
+    <div class="panel">
+    </div>
+    <div id="radar"></div>
+    <div class="panel">
+        <div class="container">
+            <div class="gauge-a"></div>
+            <div class="gauge-b"></div>
+            <div class="gauge-c"></div>
+            <div class="gauge-data">
+                <h1 id="percent">0%</h1>
+            </div>
+        </div>
+    </div>
 </div>
 <div id="right-col">
     <div id="playerQueue" class="panel"></div>
@@ -26,13 +40,14 @@
             <div id="lesson-button" class="green button">Lessons</div>
         </div>
     </div>
-    <div class="monitor">
+    <div id="lesson-panel" class="monitor">
         <div class="screen">
             <div id="lesson"></div>
         </div>
     </div>
     <div id="editor-panel" class="monitor hidden">
         <div class="screen">
+            <div class="blocker"></div>
             <div id="editor"></div>
         </div>
     </div>
@@ -40,22 +55,23 @@
         <div id="transmit-button" class="red button">Execute</div>
     </div>
     <div id="auto-panel" class="monitor">
-        <div class="button-panel up">
+        <div class="blocker"></div>
+        <div class="button-panel up" id="sub-forward">
             <div class="arrow-up"></div>
         </div>
-        <div class="button-panel left">
+        <div class="button-panel left" id="sub-left">
             <div class="arrow-left"></div>
         </div>
-        <div class="button-panel right">
+        <div class="button-panel right" id="sub-right">
             <div class="arrow-right"></div>
         </div>
-        <div class="button-panel down">
+        <div class="button-panel down" id="sub-backward">
             <div class="arrow-down"></div>
         </div>
-        <div class="button-panel surface">
+        <div class="button-panel surface" id="sub-surface">
             <div class="arrow-surface"></div>
         </div>
-        <div class="button-panel dive">
+        <div class="button-panel dive" id="sub-dive">
             <div class="arrow-dive"></div>
         </div>
     </div>
@@ -65,4 +81,8 @@
 <script src="js/submarine-teacher.js" type="text/javascript" charset="utf-8"></script>
 </body>
 <script src="js/judge-submarine-gui.js" type="text/javascript" charset="utf-8"></script>
+<script src='https://rawgithub.com/soulwire/sketch.js/master/js/sketch.min.js'></script>
+<script src="js/radar.js" type="text/javascript" charset="utf-8"></script>
+
+
 </html>
