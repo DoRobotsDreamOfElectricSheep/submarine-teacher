@@ -1,6 +1,6 @@
 var submarineFactory = (function(){
-    // var overlordEndpoint = 'http://52.11.235.138:4000/cmd';
-    var overlordEndpoint = 'http://localhost:4000/cmd';
+    var overlordEndpoint = 'http://52.11.235.138:4000/cmd';
+    // var overlordEndpoint = 'http://localhost:4000/cmd';
 
     var isMoveBackward = false;
     var isMoveForward =  false;

@@ -1,7 +1,7 @@
 // Setup the WebSocket connection and start the player
 var client = new WebSocket('ws://52.37.12.182:8084/' );
-// var endpoint = 'http://52.11.235.138:4000';
-var endpoint = 'http://localhost:4000';
+var endpoint = 'http://52.11.235.138:4000';
+// var endpoint = 'http://localhost:4000';
 var uid = '';
 var username = '';
 var canPlay = false;
