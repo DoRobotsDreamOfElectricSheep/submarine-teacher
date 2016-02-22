@@ -95,6 +95,9 @@ body {
     height: 253px;
 }
 
+#lesson-panel{
+    visibility: hidden;
+}
 #lesson{
     background: black;
     border-radius: 18px;
