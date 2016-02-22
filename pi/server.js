@@ -42,7 +42,7 @@ setInterval(function() {
 },1000);
 
 function handleResponse(response) {
-    for(int i = 0; i < body.length; i++) {
+    for(i = 0; i < body.length; i++) {
         var cmd = body[i];
 
         if(cmd === 'moveForward') {
