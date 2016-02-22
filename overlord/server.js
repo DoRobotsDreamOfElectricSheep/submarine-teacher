@@ -66,10 +66,10 @@ app.post('/cmd', function(req, res) {
         return;
     }
 
-    if(req.body.uid === currentPlayingUser) {
+    // if(req.body.uid === currentPlayingUser) {
         console.log('adding work');
         addWork(req.body.cmd);
-    }
+    // }
 
     res.send();
 });
